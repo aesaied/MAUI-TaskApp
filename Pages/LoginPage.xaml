@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskApp.Pages.LoginPage"
+             Title="LoginPage"  >
+    <VerticalStackLayout>
+
+
+        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+
+            <Image WidthRequest="300" Source="dotnet_bot.png" > </Image>
+
+            <Label Text="User name"></Label>
+            <Entry x:Name="username"></Entry>
+
+            <Label Text="Password"></Label>
+            <Entry x:Name="passwrd" IsPassword="True"></Entry>
+
+            <Button x:Name="btnLogin" Text="Login" Clicked="btnLogin_Clicked"></Button>
+
+
+            <Label Text="Register" ></Label>
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
