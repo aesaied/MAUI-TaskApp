@@ -25,7 +25,7 @@ namespace TaskApp.Helpers
         {
             var cansToken = new CancellationToken();
 
-            var httpClient = _apiHelper.GetHttpClient();
+            var httpClient =await _apiHelper.GetHttpClient();
             var result = await httpClient.PostAsJsonAsync("/api/account/login", new LoginInput() { UserName = username, Password = password }, cansToken);
 
 
@@ -35,7 +35,7 @@ namespace TaskApp.Helpers
 
                 var loginResult = JsonConvert.DeserializeObject<LoginResultDto>(responseText);
 
-                await SecureStorage.Default.SetAsync("AuthToken", loginResult?.Token!);
+                await _apiHelper.SetAuthToken(loginResult?.Token);
 
              
                 return true;
@@ -43,17 +43,7 @@ namespace TaskApp.Helpers
 
             else
             {
-                var responseText = await result.Content.ReadAsStringAsync();
-
-
-                if (responseText.StartsWith("{\"\":"))
-                {
-                    responseText = responseText.Replace("{\"\":", "").Replace("}", "");
-
-                    var errors = JsonConvert.DeserializeObject<List<string>>(responseText);
-
-                 await AppShell.Current.DisplayAlert("Error", string.Join("\n", errors), "Ok");
-                }
+                await result!.ViewErrors();
             }
 
             return false;

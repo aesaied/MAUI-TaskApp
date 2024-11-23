@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskApp.Pages.ManageTask"
+             Title="ManageTask" Shell.PresentationMode="ModalAnimated">
+    <ScrollView>
+    <VerticalStackLayout Margin="20,10">
+
+        <Label Text="Title"></Label>
+        <Entry Placeholder="task title" x:Name="txtTitle" ReturnType="Next"   ClearButtonVisibility="WhileEditing" Keyboard="Text"  ></Entry>
+        <Label Text="Description"></Label>
+        <Editor MaxLength="300" x:Name="txtDescription"  HeightRequest="100" Placeholder="task title" Keyboard="Text"  ></Editor>
+
+      
+        <HorizontalStackLayout>
+            <CheckBox x:Name="chkIsComplete"></CheckBox>
+            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="Is complete"></Label>
+        </HorizontalStackLayout>
+
+        <Button Text="Save" x:Name="btnSave" Clicked="btnSave_Clicked"></Button>
+       
+    </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +16,17 @@ namespace TaskApp.Helpers
         public ApiHelper() { }
 
 
-        public HttpClient GetHttpClient() 
+        public async Task<HttpClient> GetHttpClient() 
         {
             HttpClient httpClient = new HttpClient();
+            //
+            var token = await GetAuthToken();
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                // httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue($"{token}");
+            }
 
 #if ANDROID
             httpClient.BaseAddress = new Uri(AndroidAPIPath);
@@ -28,6 +37,18 @@ namespace TaskApp.Helpers
 
             return httpClient;
         }
-       
+
+
+
+        public async Task SetAuthToken(string token)
+        {
+            await SecureStorage.Default.SetAsync("AuthToken", token!);
+        }
+
+        private async Task<string?> GetAuthToken()
+        {
+          return  await SecureStorage.Default.GetAsync("AuthToken");
+        }
+
     }
 }
