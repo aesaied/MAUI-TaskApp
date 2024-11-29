@@ -5,12 +5,46 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TaskApp"
      xmlns:pages="clr-namespace:TaskApp.Pages"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
     Title="TaskApp">
 
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Label>Welcome to Task APP</Label>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    <Shell.FlyoutFooter  >
+        <Label>Footer text</Label>
+    </Shell.FlyoutFooter>
     <ShellContent
-        Title="Home"
+        Title="Home" 
         ContentTemplate="{DataTemplate pages:MainPage}"
         Route="MainPage" />
+
+    <ShellContent
+    Title="MVVM"
+    ContentTemplate="{DataTemplate pages:MVVMPage}"
+    Route="MVVM" />
+
+
+    <!--<MenuFlyoutItem Text="Main">
+
+        <MenuFlyoutSubItem>
+            <MenuFlyoutItem Text="Sub 1"></MenuFlyoutItem>
+        </MenuFlyoutSubItem>
+      
+    </MenuFlyoutItem>-->
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Domestic"
+             Icon="paw.png">
+            <ShellContent Title="Tab 1"
+                          Icon="cat.png"
+                          ContentTemplate="{DataTemplate pages:Tab1Page}" />
+            <ShellContent Title="Tab 2"
+                          Icon="dog.png"
+                          ContentTemplate="{DataTemplate pages:Tab2Page}" />
+        </Tab>
+    </FlyoutItem>
 
 </Shell>

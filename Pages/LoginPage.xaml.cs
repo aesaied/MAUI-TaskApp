@@ -18,7 +18,15 @@ public partial class LoginPage : ContentPage
 
     private async void btnLogin_Clicked(object sender, EventArgs e)
     {
-     
+
+
+		var  locResult =await PermissionHelper.CheckAndRequestLocationPermission();
+
+		if(locResult!= PermissionStatus.Granted)
+		{
+		await	DisplayAlert("", "You should enable location", "Ok");
+			return;
+		}
         btnLogin.IsEnabled = false;
 
 

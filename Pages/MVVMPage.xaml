@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskApp.Pages.MVVMPage"
+             xmlns:vm="clr-namespace:TaskApp.ViewModels"
+             Title="MVVMPage">
+
+    <ContentPage.BindingContext>
+        <vm:TestRegisterViewModel></vm:TestRegisterViewModel>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+
+      
+
+        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+
+            <Image WidthRequest="300" Source="dotnet_bot.png" ></Image>
+
+            <Label Text="User name"></Label>
+            <Entry x:Name="username" Text="{Binding UserName}"></Entry>
+
+            <Label IsVisible="{Binding UserNameNotValid}" Text="{Binding UserNameErrors}" TextColor="{StaticResource Danger}"></Label>
+
+            <Label Text="Password"></Label>
+            <Entry x:Name="passwrd" Text="{Binding Password}" IsPassword="True"></Entry>
+
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"></ActivityIndicator>
+            <Button x:Name="btnLogin" Text="Login" Command="{Binding RegisterCommand}" ></Button>
+
+
+            <Label Text="Register" ></Label>
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
